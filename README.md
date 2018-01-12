@@ -7,7 +7,7 @@ docker pull rliessum/powerrrshelling
 ```
 Start container:
 ```
-$ Start-PowerCLI.sh
+$ ./Start-PowerCLI.sh
 ```
 
 ## Authors
