@@ -37,7 +37,7 @@ RUN mv /powershell/Start-PowerCLI.ps1 /root/.config/powershell/Microsoft.PowerSh
 ADD https://github.com/vmware/powernsx/archive/master.zip /powershell
 RUN mkdir ~/.local/share/powershell/Modules/PowerNSX
 RUN unzip /powershell/master.zip -d /powershell/
-RUN cp /powershell/powernsx-master/PowerNSX.ps*1 ~/.local/share/powershell/Modules/PowerNSX/
+RUN cp -Rv /powershell/powernsx-master/ ~/.local/share/powershell/Modules/PowerNSX/
 
 RUN powershell -Command 'Set-PSRepository -Name PSGallery -InstallationPolicy Trusted'
 RUN powershell -Command 'Install-Module -Name PowervRA -Confirm:$false'
