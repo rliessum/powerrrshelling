@@ -34,24 +34,20 @@ RUN unzip /powershell/$POWERCLI_CIS_PACKAGE -d ~/.local/share/powershell/Modules
 
 RUN mv /powershell/Start-PowerCLI.ps1 /root/.config/powershell/Microsoft.PowerShell_profile.ps1
 
-# Add PowerNSX
-#ADD https://github.com/vmware/powernsx/archive/master.zip /powershell
-#RUN mkdir ~/.local/share/powershell/Modules/PowerNSX
-#RUN unzip /powershell/master.zip -d /powershell/
-#RUN cp /powershell/powernsx-master/PowerNSX.ps*1 ~/.local/share/powershell/Modules/PowerNSX/
+ADD https://github.com/vmware/powernsx/archive/master.zip /powershell
+RUN mkdir ~/.local/share/powershell/Modules/PowerNSX
+RUN unzip /powershell/master.zip -d /powershell/
+RUN cp /powershell/powernsx-master/PowerNSX.ps*1 ~/.local/share/powershell/Modules/PowerNSX/
 
-# Add PowervRA
 RUN powershell -Command 'Set-PSRepository -Name PSGallery -InstallationPolicy Trusted'
-#RUN powershell -Command 'Install-Module -Name PowervRA -Confirm:$false'
+RUN powershell -Command 'Install-Module -Name PowervRA -Confirm:$false'
 
-# Add
 RUN powershell -Command 'Install-Module -Name PSScriptAnalyzer'
 RUN powershell -Command 'Import-Module -Name PSScriptAnalyzer'
 RUN powershell -Command 'Install-Module -Name coveralls'
 RUN powershell -Command 'Install-Module -Name Pester'
 RUN powershell -Command 'Install-Module -Name Posh-git'
 
-# Add the PowerCLI Example Scripts and Modules
 RUN git clone https://github.com/vmware/PowerCLI-Example-Scripts
 
 RUN mv /powershell/PowerCLI-Example-Scripts/Modules/VMware.VMEncryption ~/.local/share/powershell/Modules/
@@ -61,4 +57,3 @@ RUN chmod +x /powershell/PowerCLI-Example-Scripts/Scripts/modules.sh
 RUN /powershell/PowerCLI-Example-Scripts/Scripts/modules.sh
 
 WORKDIR /tmp/scripts
-#CMD ["powershell"]
