@@ -1,4 +1,4 @@
-node {
+Pipeline {
     def app
 
     stage('Clone repository') {
